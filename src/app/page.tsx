@@ -5,7 +5,7 @@ import FeaturedProducts from "@/components/sections/FeaturedProducts";
 import WhyChooseUs from "@/components/sections/WhyChooseUs";
 import BestSellers from "@/components/sections/BestSellers";
 import PromoBanner from "@/components/sections/PromoBanner";
-import Gallery from "@/components/sections/Gallery";
+// import Gallery from "@/components/sections/Gallery";
 
 export default function Home() {
   return (
