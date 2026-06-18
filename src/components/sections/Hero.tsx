@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ShoppingBag, ArrowRight } from "lucide-react";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 32 },
@@ -21,10 +20,12 @@ const chipAnim = (delay = 0) => ({
   visible: { opacity: 1, scale: 1, transition: { type: "spring", stiffness: 260, damping: 18, delay } },
 });
 
-function SakuraFlower({ cx, cy, size = 1, opacity = 0.16 }: { cx: number; cy: number; size?: number; opacity?: number }) {
+function SakuraFlower({
+  cx, cy, size = 1, opacity = 0.16, color = "#E85C36",
+}: { cx: number; cy: number; size?: number; opacity?: number; color?: string }) {
   const r = 9 * size;
   return (
-    <g transform={`translate(${cx},${cy})`} opacity={opacity} fill="#E8547A">
+    <g transform={`translate(${cx},${cy})`} opacity={opacity} fill={color}>
       <ellipse rx={r} ry={r * 0.35} transform="rotate(-30)" />
       <ellipse cx={r * 1.1} rx={r} ry={r * 0.35} transform={`rotate(30 ${r * 1.1} 0)`} />
       <ellipse cy={-r * 0.9} rx={r} ry={r * 0.35} transform={`rotate(90 0 ${-r * 0.9})`} />
@@ -41,7 +42,7 @@ function ShokupanMascot() {
       viewBox="0 0 220 330" width="220" height="330"
       xmlns="http://www.w3.org/2000/svg"
       aria-label="Maskot roti shokupan Iseya Bakery yang lucu"
-      className="drop-shadow-[0_8px_28px_rgba(232,84,122,0.22)]"
+      className="drop-shadow-[0_8px_28px_rgba(232,84,122,0.18)]"
     >
       <defs>
         <radialGradient id="mg1" cx="50%" cy="60%" r="55%">
@@ -58,7 +59,7 @@ function ShokupanMascot() {
         </radialGradient>
       </defs>
 
-      <ellipse cx="110" cy="305" rx="58" ry="9" fill="#E8547A" opacity="0.12" />
+      <ellipse cx="110" cy="305" rx="58" ry="9" fill="#E85C36" opacity="0.12" />
 
       <rect x="28" y="132" width="164" height="146" rx="24" fill="url(#mg1)" />
       <line x1="76" y1="135" x2="76" y2="274" stroke="#E8A855" strokeWidth="1" opacity="0.17" />
@@ -96,7 +97,7 @@ function ShokupanMascot() {
       <path d="M32 108 Q36 90 62 84" fill="none" stroke="#FFB7C5" strokeWidth="1.4" strokeDasharray="3,3" opacity="0.45" />
       <circle cx="30" cy="110" r="2.8" fill="#FFB7C5" opacity="0.55" />
 
-      <g opacity="0.2" fill="#E8547A" transform="translate(152,76)">
+      <g opacity="0.2" fill="#E85C36" transform="translate(152,76)">
         <ellipse rx="8" ry="2.8" transform="rotate(-30)" />
         <ellipse cx="10" rx="8" ry="2.8" transform="rotate(30 10 0)" />
         <ellipse cy="-8" rx="8" ry="2.8" transform="rotate(90 0 -8)" />
@@ -108,7 +109,7 @@ function ShokupanMascot() {
       <text
         x="110" y="322" textAnchor="middle"
         fontFamily="'Noto Serif JP',serif" fontSize="9"
-        fill="#E8547A" opacity="0.55" letterSpacing="3"
+        fill="#E85C36" opacity="0.55" letterSpacing="3"
       >
         いせやベーカリー
       </text>
@@ -127,24 +128,39 @@ export default function Hero() {
     <section
       id="hero"
       className="relative min-h-screen flex items-center overflow-hidden"
-      style={{ background: "radial-gradient(ellipse at 72% 28%, #FFE0EC 0%, #FFF4F7 60%)" }}
+      style={{ background: "#FFF6E9" }}
     >
-      {/* Decorative SVG bg */}
+      {/* Decorative SVG bg — halftone + seigaiha wave + sakura accents */}
       <svg
         className="pointer-events-none absolute inset-0 w-full h-full"
         viewBox="0 0 1280 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true"
       >
-        <SakuraFlower cx={1140} cy={90} opacity={0.16} />
-        <SakuraFlower cx={80}   cy={620} size={0.85} opacity={0.11} />
-        <SakuraFlower cx={185}  cy={145} size={0.7}  opacity={0.09} />
-        <SakuraFlower cx={980}  cy={545} size={0.7}  opacity={0.08} />
-        <circle cx="320" cy="60"   r="2.5" fill="#FFB7C5" opacity="0.26" />
-        <circle cx="860" cy="185"  r="2"   fill="#E8547A"  opacity="0.13" />
-        <circle cx="120" cy="420"  r="3"   fill="#FFB7C5" opacity="0.18" />
-        <circle cx="1185" cy="365" r="2.5" fill="#E8547A"  opacity="0.12" />
-        <line x1="640" y1="0" x2="640" y2="800" stroke="#FFD6E0" strokeWidth="0.7" opacity="0.32" />
-        <path d="M0 720 Q320 680 640 720 Q960 760 1280 720 L1280 800 L0 800 Z" fill="white" opacity="0.42" />
+        <defs>
+          <pattern id="halftone" width="22" height="22" patternUnits="userSpaceOnUse">
+            <circle cx="11" cy="11" r="2.1" fill="#E85C36" />
+          </pattern>
+          <pattern id="seigaiha" width="64" height="32" patternUnits="userSpaceOnUse">
+            <path d="M0 32 Q16 0 32 32 Q48 0 64 32" fill="none" stroke="#2F4858" strokeWidth="2" />
+            <path d="M0 22 Q16 -10 32 22 Q48 -10 64 22" fill="none" stroke="#2F4858" strokeWidth="2" />
+          </pattern>
+        </defs>
+
+        <rect width="1280" height="800" fill="url(#halftone)" opacity="0.10" />
+        <rect y="560" width="1280" height="240" fill="url(#seigaiha)" opacity="0.10" />
+
+        <SakuraFlower cx={1140} cy={90} opacity={0.18} />
+        <SakuraFlower cx={80}   cy={620} size={0.85} opacity={0.13} color="#2F4858" />
+        <SakuraFlower cx={185}  cy={145} size={0.7}  opacity={0.11} />
+        <SakuraFlower cx={980}  cy={545} size={0.7}  opacity={0.10} color="#F2B134" />
+        <circle cx="320" cy="60"   r="2.5" fill="#F2B134" opacity="0.30" />
+        <circle cx="860" cy="185"  r="2"   fill="#2F4858" opacity="0.16" />
+        <circle cx="120" cy="420"  r="3"   fill="#E85C36" opacity="0.18" />
+        <circle cx="1185" cy="365" r="2.5" fill="#6B8F47" opacity="0.18" />
+        <line x1="640" y1="0" x2="640" y2="800" stroke="#E85C36" strokeWidth="0.7" opacity="0.10" />
       </svg>
+
+      {/* Perforated "tear here" line near the bottom */}
+      <div className="pointer-events-none absolute bottom-12 left-0 w-full border-t-2 border-dashed border-[#E85C36]/25" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-4 items-center">
@@ -153,42 +169,42 @@ export default function Hero() {
           <div className="flex flex-col items-start">
 
             <motion.div custom={0} variants={fadeUp} initial="hidden" animate="visible">
-              <span className="inline-flex items-center gap-2 bg-white border-[1.5px] border-[#FFB7C5] text-[#B83060] text-[10px] font-bold tracking-widest px-4 py-2 rounded-full mb-5 shadow-sm">
-                <span className="w-2 h-2 rounded-full bg-[#E8547A] flex-shrink-0 inline-block" />
+              <span className="inline-flex items-center gap-2 bg-[#FFF6E9] border-2 border-dashed border-[#E85C36] text-[#C8431F] text-[10px] font-bold tracking-widest px-4 py-2 rounded-md mb-5 shadow-sm -rotate-2">
+                <span className="w-2 h-2 rounded-full bg-[#E85C36] flex-shrink-0 inline-block" />
                 TOKO ROTI JEPANG ARTISAN
               </span>
             </motion.div>
 
             <motion.p
               custom={0.08} variants={fadeUp} initial="hidden" animate="visible"
-              className="text-[12px] font-bold tracking-[0.22em] text-[#FFB7C5] mb-1"
+              className="text-[12px] font-bold tracking-[0.22em] text-[#5C7A8A] mb-1"
               style={{ fontFamily: "'Noto Serif JP','Hiragino Mincho ProN',serif" }}
             >
               イセヤベーカリー
             </motion.p>
 
             <motion.div custom={0.12} variants={fadeUp} initial="hidden" animate="visible">
-              <p className="text-[20px] font-black tracking-tight text-[#1A0E14] mb-1"
+              <p className="text-[20px] font-black tracking-tight text-[#2A1B12] mb-1"
                 style={{ fontFamily: "'Noto Serif JP',serif" }}>
-                Iseya <span className="text-[#E8547A]">Bakery</span>
+                Iseya <span className="text-[#E85C36]">Bakery</span>
               </p>
             </motion.div>
 
             <motion.h1
               custom={0.18} variants={fadeUp} initial="hidden" animate="visible"
-              className="text-4xl sm:text-5xl font-black leading-[1.12] tracking-tight mb-4 text-[#1A0E14]"
+              className="text-4xl sm:text-5xl font-black leading-[1.12] tracking-tight mb-4 text-[#2A1B12]"
             >
               Roti Segar{" "}
-              <span className="relative inline-block text-[#E8547A]">
-                Dipanggang Tiap Pagi
-                <span className="absolute left-0 -bottom-0.5 w-full h-1 rounded-full bg-gradient-to-r from-[#FFB7C5] to-[#E8547A] opacity-45" />
+              <span className="relative inline-block">
+                <span className="absolute -inset-1 -rotate-1 bg-[#F2B134] rounded-sm -z-10" />
+                <span className="relative">Dipanggang Tiap Pagi</span>
               </span>
               {" "}dengan Cinta
             </motion.h1>
 
             <motion.p
               custom={0.25} variants={fadeUp} initial="hidden" animate="visible"
-              className="text-sm leading-[1.8] text-[#7A5060] mb-8 max-w-[330px]"
+              className="text-sm leading-[1.8] text-[#8A6F58] mb-8 max-w-[330px]"
             >
               Dibuat dengan teknik tradisional Jepang — shokupan lembut,
               pastri bertekstur mochi, dan kreasi musiman. Tanpa pengawet,
@@ -196,39 +212,15 @@ export default function Hero() {
             </motion.p>
 
             <motion.div
-              custom={0.32} variants={fadeUp} initial="hidden" animate="visible"
-              className="flex flex-wrap gap-3 mb-10"
-            >
-              <button
-                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-2xl text-white text-sm font-bold
-                           shadow-[0_6px_18px_rgba(232,84,122,0.30)]
-                           hover:-translate-y-0.5 hover:shadow-[0_10px_26px_rgba(232,84,122,0.40)]
-                           active:scale-95 transition-all"
-                style={{ background: "linear-gradient(135deg,#E8547A,#C03060)" }}
-              >
-                <ShoppingBag size={15} />
-                Pesan Sekarang
-              </button>
-              <button
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl text-sm font-bold
-                           text-[#E8547A] bg-white border-2 border-[#FFB7C5]
-                           hover:border-[#E8547A] hover:bg-[#FFF0F4] transition-all"
-                onClick={() => document.getElementById("menu")?.scrollIntoView({ behavior: "smooth" })}
-              >
-                Lihat Menu <ArrowRight size={14} />
-              </button>
-            </motion.div>
-
-            <motion.div
               custom={0.40} variants={fadeUp} initial="hidden" animate="visible"
               className="flex flex-wrap items-center gap-5"
             >
               {stats.map((s, i) => (
                 <div key={s.label} className="flex items-center gap-5">
-                  {i > 0 && <div className="w-px h-9 bg-[#FFD6E0] hidden sm:block" />}
+                  {i > 0 && <div className="w-px h-9 bg-[#F0DAB8] hidden sm:block" />}
                   <div className="text-center">
-                    <p className="text-[20px] font-black text-[#1A0E14] leading-none">{s.num}</p>
-                    <p className="text-[10px] text-[#A07080] mt-0.5 tracking-wide">{s.label}</p>
+                    <p className="text-[20px] font-black text-[#2A1B12] leading-none">{s.num}</p>
+                    <p className="text-[10px] text-[#8A6F58] mt-0.5 tracking-wide">{s.label}</p>
                   </div>
                 </div>
               ))}
@@ -243,15 +235,15 @@ export default function Hero() {
               <motion.div
                 variants={chipAnim(0.9)} initial="hidden" animate="visible"
                 className="absolute -top-4 -right-2 sm:-right-6 z-10
-                           bg-white border-[1.5px] border-[#FFD6E0] rounded-2xl px-3 py-2
-                           flex items-center gap-2 shadow-[0_4px_14px_rgba(232,84,122,0.10)]
-                           text-[10px] font-bold text-[#1A0E14]"
+                           bg-[#F2B134] border-2 border-dashed border-[#2A1B12]/25 rounded-xl px-3 py-2
+                           flex items-center gap-2 shadow-[0_5px_14px_rgba(0,0,0,0.14)]
+                           text-[10px] font-bold text-[#2A1B12] rotate-3"
                 style={{ animation: "ibchip 3s ease-in-out infinite 0.5s" }}
               >
                 <span className="text-[15px]">🌿</span>
                 <div>
                   <p className="leading-none">100% Alami</p>
-                  <p className="text-[#A07080] font-normal leading-tight mt-0.5">Tanpa Pengawet</p>
+                  <p className="text-[#5C4A30] font-normal leading-tight mt-0.5">Tanpa Pengawet</p>
                 </div>
               </motion.div>
 
@@ -259,20 +251,33 @@ export default function Hero() {
               <motion.div
                 variants={chipAnim(1.1)} initial="hidden" animate="visible"
                 className="absolute top-[155px] -left-4 sm:-left-10 z-10
-                           bg-white border-[1.5px] border-[#FFD6E0] rounded-2xl px-3 py-2
-                           flex items-center gap-2 shadow-[0_4px_14px_rgba(232,84,122,0.10)]
-                           text-[10px] font-bold text-[#1A0E14]"
+                           bg-[#2F4858] border-2 border-dashed border-white/25 rounded-xl px-3 py-2
+                           flex items-center gap-2 shadow-[0_5px_14px_rgba(0,0,0,0.20)]
+                           text-[10px] font-bold text-[#FFF6E9] -rotate-3"
               >
-                <span className="text-amber-400 tracking-tight">★★★★★</span>
+                <span className="text-amber-300 tracking-tight">★★★★★</span>
                 <div>
                   <p className="leading-none">Rating 4.9</p>
-                  <p className="text-[#A07080] font-normal leading-tight mt-0.5">2.400+ ulasan</p>
+                  <p className="text-[#FFF6E9]/70 font-normal leading-tight mt-0.5">2.400+ ulasan</p>
                 </div>
               </motion.div>
 
-              {/* Glow behind mascot */}
-              <div className="absolute inset-0 rounded-full blur-3xl opacity-25 scale-75"
-                style={{ background: "radial-gradient(circle,#FFB7C5,transparent 70%)" }} />
+              {/* Sunburst behind mascot (replaces soft glow) */}
+              <svg
+                className="absolute inset-0 opacity-[0.18]"
+                viewBox="0 0 220 330" aria-hidden="true"
+                style={{ animation: "ibspin 60s linear infinite" }}
+              >
+                <g transform="translate(110,165)">
+                  {Array.from({ length: 16 }).map((_, i) => (
+                    <rect
+                      key={i} x={-3} y={-170} width={6} height={170}
+                      fill={i % 2 === 0 ? "#E85C36" : "#F2B134"}
+                      transform={`rotate(${i * 22.5})`}
+                    />
+                  ))}
+                </g>
+              </svg>
 
               {/* Mascot float */}
               <div style={{ animation: "ibfloat 3.6s ease-in-out infinite" }}>
@@ -288,20 +293,21 @@ export default function Hero() {
       <motion.div
         initial={{ opacity: 0 }} animate={{ opacity: 1 }}
         transition={{ delay: 1.6, duration: 0.6 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-[#A07080]"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-[#8A6F58]"
       >
         <span className="text-[10px] font-bold tracking-[0.2em] uppercase">Gulir</span>
         <motion.div
           animate={{ y: [0, 7, 0] }} transition={{ duration: 1.5, repeat: Infinity }}
           className="w-px h-8 rounded-full"
-          style={{ background: "linear-gradient(to bottom,#E8547A,transparent)" }}
+          style={{ background: "linear-gradient(to bottom,#E85C36,transparent)" }}
         />
       </motion.div>
 
       {/* Keyframe styles */}
       <style>{`
         @keyframes ibfloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-11px)} }
-        @keyframes ibchip  { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)}  }
+        @keyframes ibchip  { 0%,100%{transform:translateY(0) rotate(3deg)} 50%{transform:translateY(-5px) rotate(3deg)}  }
+        @keyframes ibspin  { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
       `}</style>
     </section>
   );
