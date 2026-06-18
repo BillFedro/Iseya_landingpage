@@ -121,13 +121,35 @@ export default function FeaturedProducts() {
       <div className="pointer-events-none absolute bottom-16 left-12 w-14 h-6 -rotate-6 opacity-20" style={{ background: "#8FA77B" }} />
 
       <svg
-        className="pointer-events-none absolute inset-0 w-full h-full"
-        viewBox="0 0 1280 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true"
-      >
-        <SakuraFlower cx={1160} cy={120} size={0.9} opacity={0.10} color="#D98E94" />
-        <SakuraFlower cx={60}   cy={800} size={0.75} opacity={0.08} color="#8FA77B" />
-        <SakuraFlower cx={600}  cy={880} size={0.6}  opacity={0.06} color="#D98E94" />
-      </svg>
+  className="pointer-events-none absolute inset-0 w-full h-full"
+  viewBox="0 0 1280 900"
+  preserveAspectRatio="xMidYMid slice"
+  aria-hidden="true"
+>
+  <SakuraFlower
+    cx={1160}
+    cy={120}
+    size={0.9}
+    opacity={0.10}
+    fill="#D98E94"
+  />
+
+  <SakuraFlower
+    cx={60}
+    cy={800}
+    size={0.75}
+    opacity={0.08}
+    fill="#8FA77B"
+  />
+
+  <SakuraFlower
+    cx={600}
+    cy={880}
+    size={0.6}
+    opacity={0.06}
+    fill="#D98E94"
+  />
+</svg>
 
       <div className="section-container relative z-10">
         {/* Header */}

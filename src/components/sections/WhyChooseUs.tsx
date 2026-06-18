@@ -95,23 +95,19 @@ export default function WhyChooseUs() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+          className="grid grid-cols-1 sm:grid-cols-2 gap-8"
         >
           {features.map((feature) => (
             <motion.div
               key={feature.title}
               variants={itemVariants}
-              whileHover={{ y: -6, transition: { duration: 0.2 } }}
-              className="bg-white border-[1.5px] border-[#FFD6E0] rounded-3xl p-6
-                         shadow-sm hover:shadow-[0_8px_24px_rgba(232,84,122,0.12)] transition-all"
+              whileHover={{ x: 4, transition: { duration: 0.2 } }}
+              className="bg-white border-l-4 border-[#E8547A] rounded-r-2xl p-6
+                         shadow-sm hover:shadow-md transition-all duration-300"
             >
-              <motion.div
-                whileHover={{ rotate: 10, scale: 1.1 }}
-                transition={{ type: "spring", stiffness: 300 }}
-                className="w-12 h-12 rounded-2xl bg-[#FFF0F4] flex items-center justify-center mb-5"
-              >
-                <feature.icon size={22} className="text-[#E8547A]" />
-              </motion.div>
+              <div className="mb-4">
+                <feature.icon size={20} className="text-[#E8547A]" />
+              </div>
               <h3 className="font-bold text-[#1A0E14] mb-2">{feature.title}</h3>
               <p className="text-sm text-[#7A5060] leading-relaxed">
                 {feature.description}

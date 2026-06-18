@@ -194,10 +194,10 @@ export default function Hero() {
               custom={0.18} variants={fadeUp} initial="hidden" animate="visible"
               className="text-4xl sm:text-5xl font-black leading-[1.12] tracking-tight mb-4 text-[#2A1B12]"
             >
-              Roti Segar{" "}
+              Roti Fresh{" "}
               <span className="relative inline-block">
                 <span className="absolute -inset-1 -rotate-1 bg-[#F2B134] rounded-sm -z-10" />
-                <span className="relative">Dipanggang Tiap Pagi</span>
+                <span className="relative">Setiap Hari</span>
               </span>
               {" "}dengan Cinta
             </motion.h1>

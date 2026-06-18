@@ -5,12 +5,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "next-themes";
 import { Sun, Moon, Menu, X, ShoppingBag } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 const navLinks = [
-  { label: "Menu",        href: "#menu"    },
-  { label: "Tentang Kami", href: "#why-us"  },
-  { label: "Galeri",      href: "#gallery" },
-  { label: "Kontak",      href: "#footer"  },
+  { label: "Menu", href: "#menu" },
+  { label: "Tentang Kami", href: "#why-us" },
+  { label: "Galeri", href: "#gallery" },
+  { label: "Kontak", href: "#footer" },
 ];
 
 function BreadIcon() {
@@ -19,7 +20,7 @@ function BreadIcon() {
       <path d="M3 9C3 7 5 5 12 5C19 5 21 7 21 9" stroke="white" strokeWidth="2" strokeLinecap="round" />
       <rect x="3" y="9" width="18" height="10" rx="3" fill="white" fillOpacity="0.2" />
       <rect x="3" y="9" width="18" height="10" rx="3" stroke="white" strokeWidth="2" />
-      <line x1="9"  y1="9" x2="9"  y2="19" stroke="white" strokeWidth="1.5" strokeOpacity="0.5" />
+      <line x1="9" y1="9" x2="9" y2="19" stroke="white" strokeWidth="1.5" strokeOpacity="0.5" />
       <line x1="15" y1="9" x2="15" y2="19" stroke="white" strokeWidth="1.5" strokeOpacity="0.5" />
     </svg>
   );
@@ -27,10 +28,10 @@ function BreadIcon() {
 
 export default function Navbar() {
   const { theme, setTheme } = useTheme();
-  const [mounted,    setMounted]    = useState(false);
-  const [scrolled,   setScrolled]   = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [active,     setActive]     = useState("Menu");
+  const [active, setActive] = useState("Menu");
 
   useEffect(() => {
     setMounted(true);
@@ -57,12 +58,17 @@ export default function Navbar() {
           {/* ── Logo ── */}
           <a href="#" className="flex items-center gap-2.5 group">
             <div
-              className="w-10 h-10 rounded-[14px] flex items-center justify-center flex-shrink-0
-                         shadow-[0_4px_12px_rgba(232,84,122,0.30)]
-                         group-hover:scale-105 transition-transform"
-              style={{ background: "linear-gradient(135deg,#E8547A,#C03060)" }}
+              className="relative w-10 h-10 rounded-[14px] overflow-hidden flex-shrink-0
+             shadow-[0_4px_12px_rgba(232,84,122,0.30)]
+             group-hover:scale-105 transition-transform"
             >
-              <BreadIcon />
+              <Image
+                src="/logo/logo.png"
+                alt="Iseya Bakery"
+                fill
+                className="object-cover"
+                priority
+              />
             </div>
             <div className="flex flex-col leading-none">
               <span
@@ -114,7 +120,7 @@ export default function Navbar() {
             </span>
 
             {/* Theme toggle */}
-            <button
+            {/* <button
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
               className="w-[36px] h-[36px] rounded-[10px] border-[1.5px] border-[#FFD6E0] bg-white
                          flex items-center justify-center text-[#A07080]
@@ -123,7 +129,7 @@ export default function Navbar() {
               aria-label="Ganti tema"
             >
               {mounted && theme === "dark" ? <Sun size={15} /> : <Moon size={15} />}
-            </button>
+            </button> */}
 
             {/* CTA */}
             <button
